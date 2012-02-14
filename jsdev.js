@@ -90,7 +90,7 @@
 //
 // at the top of the output file.
 
-function JSDEV(source, tags, comments) {
+module.exports = function JSDEV(source, tags, comments) {
     'use strict';
 
     var line,
@@ -408,12 +408,7 @@ function JSDEV(source, tags, comments) {
                                 if (c === null) {
                                     error("unterminated comment.");
                                 }
-                                if (c === '/') {
-                                    c = get(true);
-                                    if (c === '*' || c === '/') {
-                                        error("nested comment.");
-                                    }
-                                } else if (c === '*') {
+                                if (c === '*') {
                                     c = get(true);
                                     if (c === '/') {
                                         break;
