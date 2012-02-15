@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+for test in `ls test/*.test.js`; do
+    echo "./node_modules/.bin/mocha \"$test\" --reporter spec -r should"
+    ./node_modules/.bin/mocha "$test" --reporter spec -r should
+done
