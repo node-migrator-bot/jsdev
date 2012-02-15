@@ -1,6 +1,6 @@
 {
     "name": "jsdev"
-  , "version": "0.1.0"
+  , "version": "0.1.1"
   , "author": "Yuest Wang <yuestwang@gmail.com> (http://yue.st)"
   , "description": "JSDev is a filter that activates selected comments, making them executable.\n\nThis is a wrapper for use JSDev in your node project.  It will change hte require function behavior.  Check the project homepage on github to learn more.\n\nIf you just want to use JSDev, check the `JSDev` module(it's another module since npm registry is case-sensitive)."
   , "keyword": ["JSDev", "developer", "preprocessor"]
