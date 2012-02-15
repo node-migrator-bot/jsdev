@@ -10,7 +10,7 @@ JSDEV = exports = module.exports = require('./jsdev')
 exports.JSDEV = JSDEV
 
 var modifyContent = exports.modifyContent = function(content, othertags) {
-  var jsdevtags = {}
+  var jsdevtags = []
     , ENV = process.env.NODE_ENV || 'development'
   content.replace(/^\s*\/\/@jsdev(?:\(([^\)]+)\))?\s+([A-Za-z0-9_:\.\$\s]+)$/img, function(nonchange, envs, tags) {
     envs = (envs || 'development').split(/\s*,\s*/)
@@ -18,7 +18,7 @@ var modifyContent = exports.modifyContent = function(content, othertags) {
       return
     }
     tags.trim().split(/\s+/).forEach(function(tag) {
-      tag.length && (jsdevtags[tag] = 1)
+      tag && jsdevtags.push(tag)
     })
     return nonchange
   })
@@ -31,13 +31,18 @@ var modifyContent = exports.modifyContent = function(content, othertags) {
         return
       }
       if ('-' === tag[0]) {
+        tag = tag.slice(1)
+        for (var i = jsdevtags.length-1; i >= 0; i--) {
+          if (!jsdevtags[i].indexOf(tag) && (!jsdevtags[i][tag.length] || ':' === jsdevtags[i][tag.length])) {
+            jsdevtags.splice(i, 1)
+          }
+        }
         delete jsdevtags[tag.slice(1)]
       } else {
-        jsdevtags['+' === tag[0] ? tag.slice(1) : tag] = 1
+        jsdevtags.push('+' === tag[0] ? tag.slice(1) : tag)
       }
     })
   }
-  jsdevtags = Object.keys(jsdevtags)
   if (jsdevtags.length) {
     content = JSDEV(content, jsdevtags)
   }

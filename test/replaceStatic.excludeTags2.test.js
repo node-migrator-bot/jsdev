@@ -1,8 +1,8 @@
-require('../index').replaceStatic('-say')
+require('../index').replaceStatic('-tag2')
 var connect = require('connect')
   , request = require('request')
 
-describe("replaceStatic('-say')", function() {
+describe("replaceStatic('-tag2')", function() {
   describe('development', function() {
     var app = connect()
     before(function() {
@@ -15,7 +15,7 @@ describe("replaceStatic('-say')", function() {
         body
           .should.include("{util.puts('tag1 opened')}")
           .and.include("/*tag2 util.puts('tag2 opened')*/")
-          .and.include("/*say 'World'*/")
+          .and.include("{sayHi('World');}")
         done()
       })
     })
@@ -38,8 +38,8 @@ describe("replaceStatic('-say')", function() {
       request('http://127.0.0.1:8899/replaceRequire.js', function(err, res, body) {
         body
           .should.include("/*tag1 util.puts('tag1 opened')*/")
-          .and.include("{util.puts('tag2 opened')}")
-          .and.include("/*say 'World'*/")
+          .and.include("/*tag2 util.puts('tag2 opened')*/")
+          .and.include("{sayHello('World');}")
         done()
       })
     })
@@ -61,7 +61,7 @@ describe("replaceStatic('-say')", function() {
       request('http://127.0.0.1:8899/replaceRequire.js', function(err, res, body) {
         body
           .should.include("/*tag1 util.puts('tag1 opened')*/")
-          .and.include("{util.puts('tag2 opened')}")
+          .and.include("/*tag2 util.puts('tag2 opened')*/")
           .and.include("/*say 'World'*/")
         done()
       })
