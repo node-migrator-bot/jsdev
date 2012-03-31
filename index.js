@@ -11,7 +11,7 @@ exports.JSDEV = JSDEV
 
 var modifyContent = exports.modifyContent = function(content, othertags) {
   var jsdevtags = []
-    , ENV = process.env.NODE_ENV || 'development'
+    , ENV = process.env.NODE_JSDEV || process.env.NODE_ENV || 'development'
   content.replace(/^\s*\/\/@jsdev(?:\(([^\)]+)\))?\s+([A-Za-z0-9_:\.\$\s]+)$/img, function(nonchange, envs, tags) {
     envs = (envs || 'development').split(/\s*,\s*/)
     if (!~envs.indexOf(ENV)) {

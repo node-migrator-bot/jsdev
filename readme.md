@@ -154,3 +154,7 @@ b.js:
 
 [discuss]: http://club.cnodejs.org/topic/4f3b65a1b43c3c846a05518c
 [issue]: https://github.com/yuest/jsdev/issues
+
+##Change Log
+
+0\.1.2 新增 NODE_JSDEV 环境变量支持，可以将 node 运行环境和 jsdev 预处理环境分开
