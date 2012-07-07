@@ -95,7 +95,7 @@ exports.replaceStatic = function(othertags) {
               throw new Error('path required')
             } else if ((pathname = url.parse(req.url).pathname).match(/\.js$/)) {
               var filePath = path.normalize(path.join(root, decodeURIComponent(pathname)))
-              path.exists(filePath, function(exists) {
+              fs.exists(filePath, function(exists) {
                 if (!exists) {
                   return next()
                 } else {
